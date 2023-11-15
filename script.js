@@ -1,7 +1,9 @@
 // DOM Elements
 const pokemonContainerElement = document.getElementById('pokemon-container')
 const typeSelectElement = document.getElementById('type-select')
-const loading = document.getElementById('loading')
+const loadingElement = document.getElementById('loading')
+const nameInputElement = document.getElementById('name-input')
+const noResultsElement = document.getElementById('no-results')
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,6 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 typeSelectElement.addEventListener('change', () => {
 	handleTypeSelect()
+})
+
+nameInputElement.addEventListener('input', () => {
+	// handleNameInput()
+	console.log('name')
 })
 
 // Variables
@@ -31,11 +38,11 @@ const fetchPokemon = async () => {
 		promises.push(fetchPokemonResponse(i))
 	}
 
-	loading.classList.remove('opacity-0')
+	loadingElement.classList.remove('opacity-0')
 	Promise.all(promises).then((pokemons) => {
 		pokemon = pokemons
 		renderPokemon()
-		loading.classList.add('opacity-0')
+		loadingElement.classList.add('opacity-0')
 	})
 }
 
@@ -194,8 +201,14 @@ const handleTypeSelect = () => {
 	if (selection === 'all') {
 		renderPokemon()
 	} else {
-		renderPokemon(
-			pokemon.filter((item) => item.types[0].type.name === selection)
-		)
+		const temp = pokemon.filter((item) => item.types[0].type.name === selection)
+
+		if (temp.length > 0) {
+			noResultsElement.classList.add('hidden')
+			renderPokemon(temp)
+		} else {
+			noResultsElement.classList.remove('hidden')
+			pokemonContainerElement.innerHTML = ''
+		}
 	}
 }

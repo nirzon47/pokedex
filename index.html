@@ -29,11 +29,9 @@
 					placeholder="Type here"
 					class="w-full max-w-xs input input-bordered"
 					id="name-input"
+					form="search"
 				/>
 			</div>
-
-			<!-- Search Button -->
-			<button class="btn btn-primary" id="search-btn">Search</button>
 
 			<!-- By Type -->
 			<div class="w-full max-w-xs form-control">
@@ -75,6 +73,14 @@
 			<div class="flex items-center justify-center opacity-0" id="loading">
 				<span class="w-12 mx-auto loading loading-dots text-yellow-50"></span>
 			</div>
+
+			<!-- No Results -->
+			<p
+				class="hidden text-2xl font-bold text-center text-red-500"
+				id="no-results"
+			>
+				No results found!
+			</p>
 
 			<!-- Pokemon Cards -->
 			<section
