@@ -4,6 +4,7 @@ const typeSelectElement = document.getElementById('type-select')
 const loadingElement = document.getElementById('loading')
 const nameInputElement = document.getElementById('name-input')
 const noResultsElement = document.getElementById('no-results')
+const generationSelectElement = document.getElementById('generation-select')
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,8 +20,13 @@ nameInputElement.addEventListener('input', () => {
 	handleSearch()
 })
 
+generationSelectElement.addEventListener('change', () => {
+	handleGenerationSelect()
+})
+
 // Variables
 let pokemon = [] // Globally storing fetched data
+let currGen = 'one' // Current generation
 
 // Functions
 const fetchPokemonResponse = (id) => {
@@ -31,7 +37,6 @@ const fetchPokemonResponse = (id) => {
 
 const fetchPokemon = async () => {
 	const promises = []
-	const currGen = 'one'
 
 	for (let i = gen[currGen].start; i <= gen[currGen].end; i++) {
 		promises.push(fetchPokemonResponse(i))
@@ -198,6 +203,7 @@ const handleTypeSelect = () => {
 	const selection = typeSelectElement.value
 
 	if (selection === 'all') {
+		noResultsElement.classList.add('hidden')
 		renderPokemon()
 	} else {
 		const temp = pokemon.filter((item) => item.types[0].type.name === selection)
@@ -223,4 +229,11 @@ const handleSearch = () => {
 		)
 		renderPokemon(temp)
 	}
+}
+
+const handleGenerationSelect = () => {
+	currGen = generationSelectElement.value
+	fetchPokemon()
+	nameInputElement.value = ''
+	typeSelectElement.value = 'all'
 }
