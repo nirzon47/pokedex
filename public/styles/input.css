@@ -22,7 +22,7 @@
 	}
 
 	.card {
-		@apply flex flex-col items-center gap-4 mx-auto bg-green-400 w-60 h-80 rounded-xl;
+		@apply flex flex-col items-center gap-4 mx-auto shadow-sm shadow-current w-60 h-80 rounded-xl;
 	}
 
 	.type {

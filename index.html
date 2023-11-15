@@ -10,6 +10,7 @@
 
 		<!-- Scripts -->
 		<script src="generation.js" defer></script>
+		<script src="script.js" defer></script>
 	</head>
 	<body class="w-screen min-h-screen px-4 py-8">
 		<h1 class="text-4xl text-center font-chelsea">POKEDECKS</h1>
@@ -81,24 +82,27 @@
 					<input type="checkbox" />
 
 					<!-- Base Card -->
-					<div class="card swap-off">
+					<div class="bg-green-800 card swap-off">
 						<!-- ID -->
 						<h3 class="card-id">#001</h3>
 						<!-- Image -->
 						<img
 							src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
 							alt="Bulbasaur"
-							class="w-32"
+							class="h-32 max-w-[91%]"
 						/>
 						<!-- Name -->
-						<h3 class="text-2xl font-semibold">Bulbasaur</h3>
+						<h3 class="text-2xl font-semibold capitalize">Bulbasaur</h3>
 
 						<!-- Type -->
-						<p class="type">Grass</p>
+						<div class="flex gap-x-2">
+							<p class="type">Grass</p>
+							<p class="type">Poison</p>
+						</div>
 					</div>
 
 					<!-- Abilites -->
-					<div class="card swap-on">
+					<div class="bg-green-800 card swap-on">
 						<!-- ID -->
 						<h3 class="card-id">#001</h3>
 						<!-- Image -->
@@ -118,5 +122,24 @@
 				</label>
 			</section>
 		</section>
+		<!-- Empty divs to import the tailwind styles -->
+		<div class="bg-green-400"></div>
+		<div class="bg-red-400"></div>
+		<div class="bg-blue-400"></div>
+		<div class="bg-yellow-400"></div>
+		<div class="bg-gray-400"></div>
+		<div class="bg-purple-400"></div>
+		<div class="bg-pink-400"></div>
+		<div class="bg-yellow-700"></div>
+		<div class="bg-yellow-300"></div>
+		<div class="bg-red-600"></div>
+		<div class="bg-pink-600"></div>
+		<div class="bg-gray-600"></div>
+		<div class="bg-purple-600"></div>
+		<div class="bg-cyan-400"></div>
+		<div class="bg-yellow-50"></div>
+		<div class="bg-gray-800"></div>
+		<div class="bg-zinc-700"></div>
+		<div class="bg-blue-300"></div>
 	</body>
 </html>
