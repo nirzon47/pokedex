@@ -1,13 +1,19 @@
 // DOM Elements
 const pokemonContainerElement = document.getElementById('pokemon-container')
+const typeSelectElement = document.getElementById('type-select')
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
 	fetchPokemon()
+	fetchTypes()
+})
+
+typeSelectElement.addEventListener('change', () => {
+	handleTypeSelect()
 })
 
 // Variables
-let data = []
+let pokemon = [] // Globally storing fetched data
 
 // Functions
 const fetchPokemonResponse = (id) => {
@@ -25,22 +31,25 @@ const fetchPokemon = async () => {
 	}
 
 	Promise.all(promises).then((pokemons) => {
-		data = pokemons
+		pokemon = pokemons
 		renderPokemon()
 	})
 }
 
-const renderPokemon = () => {
+const renderPokemon = (data = pokemon) => {
 	pokemonContainerElement.innerHTML = ''
 	const fragment = document.createDocumentFragment()
 
 	data.forEach((item) => {
 		const label = document.createElement('label')
 		label.classList.add('swap', 'swap-flip')
+
+		// Getting the id, if it is less than 100, add zeros to make it 3 digit
 		const id = item.id.toString().padStart(3, '0')
 
 		label.id = item.id
 
+		// Getting types and abilities
 		const [types, abilities] = getTypesAndAbilities(item)
 
 		// Getting background color of the card
@@ -154,5 +163,36 @@ const getBackgroundColor = (type) => {
 
 		case 'flying':
 			return 'bg-blue-300'
+
+		case 'unknown':
+			return 'bg-zinc-800'
+
+		case 'shadow':
+			return 'bg-zinc-900'
+	}
+}
+
+const fetchTypes = async () => {
+	const response = await fetch('https://pokeapi.co/api/v2/type')
+	const data = await response.json()
+	const types = data.results
+
+	types.forEach((type) => {
+		const option = document.createElement('option')
+		option.value = type.name
+		option.textContent = type.name.charAt(0).toUpperCase() + type.name.slice(1)
+		typeSelectElement.append(option)
+	})
+}
+
+const handleTypeSelect = () => {
+	const selection = typeSelectElement.value
+
+	if (selection === 'all') {
+		renderPokemon()
+	} else {
+		renderPokemon(
+			pokemon.filter((item) => item.types[0].type.name === selection)
+		)
 	}
 }
