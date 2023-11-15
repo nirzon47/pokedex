@@ -1,6 +1,7 @@
 // DOM Elements
 const pokemonContainerElement = document.getElementById('pokemon-container')
 const typeSelectElement = document.getElementById('type-select')
+const loading = document.getElementById('loading')
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,9 +31,11 @@ const fetchPokemon = async () => {
 		promises.push(fetchPokemonResponse(i))
 	}
 
+	loading.classList.remove('opacity-0')
 	Promise.all(promises).then((pokemons) => {
 		pokemon = pokemons
 		renderPokemon()
+		loading.classList.add('opacity-0')
 	})
 }
 
