@@ -69,12 +69,15 @@ const renderPokemon = (data = pokemon) => {
 		// Getting background color of the card
 		const bgColor = getBackgroundColor(item.types[0].type.name)
 
+		// Getting the sprites
+		const [frontSprite, backSprite] = getSprites(item)
+
 		label.innerHTML = `
                      <input type="checkbox" />
                         <div class="card ${bgColor} swap-off">
                             <h3 class="card-id">${id}</h3>
                             <img
-                                src="${item.sprites.other.dream_world.front_default}"
+                                src="${frontSprite}"
                                 alt="${item.name}"
                                 class="h-32 max-w-[91%]"
                             />
@@ -86,7 +89,7 @@ const renderPokemon = (data = pokemon) => {
                         <div class="card ${bgColor} swap-on">
                             <h3 class="card-id">${id}</h3>
                             <img
-                                src="${item.sprites.other.home.front_shiny}"
+                                src="${backSprite}"
                                 alt="${item.name}"
                                 class="h-32 max-w-[91%]"
                             />
@@ -236,4 +239,24 @@ const handleGenerationSelect = () => {
 	fetchPokemon()
 	nameInputElement.value = ''
 	typeSelectElement.value = 'all'
+}
+
+const getSprites = (item) => {
+	if (
+		currGen === 'one' ||
+		currGen === 'two' ||
+		currGen === 'three' ||
+		currGen === 'four' ||
+		currGen === 'five'
+	) {
+		return [
+			item.sprites.other.dream_world.front_default,
+			item.sprites.other.home.front_shiny,
+		]
+	} else {
+		return [
+			item.sprites.other.home.front_default,
+			item.sprites.other.home.front_shiny,
+		]
+	}
 }
