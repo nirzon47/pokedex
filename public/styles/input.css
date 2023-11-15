@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: 'Geist';
+		src: url('../font/GeistSans.woff2');
+		font-weight: 400, 500, 600, 700;
+	}
+
+	@font-face {
+		font-family: 'Chelsea';
+		src: url('../font/ChelseaMarket.ttf');
+		font-weight: 400;
+	}
+}
