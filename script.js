@@ -16,8 +16,7 @@ typeSelectElement.addEventListener('change', () => {
 })
 
 nameInputElement.addEventListener('input', () => {
-	// handleNameInput()
-	console.log('name')
+	handleSearch()
 })
 
 // Variables
@@ -82,7 +81,7 @@ const renderPokemon = (data = pokemon) => {
                         <div class="card ${bgColor} swap-on">
                             <h3 class="card-id">${id}</h3>
                             <img
-                                src="${item.sprites.other.dream_world.front_default}"
+                                src="${item.sprites.other.home.front_shiny}"
                                 alt="${item.name}"
                                 class="h-32 max-w-[91%]"
                             />
@@ -210,5 +209,18 @@ const handleTypeSelect = () => {
 			noResultsElement.classList.remove('hidden')
 			pokemonContainerElement.innerHTML = ''
 		}
+	}
+}
+
+const handleSearch = () => {
+	const value = nameInputElement.value.toLowerCase()
+
+	if (value === '') {
+		renderPokemon()
+	} else {
+		const temp = pokemon.filter((item) =>
+			item.name.toLowerCase().includes(value)
+		)
+		renderPokemon(temp)
 	}
 }
