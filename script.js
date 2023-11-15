@@ -5,6 +5,7 @@ const loadingElement = document.getElementById('loading')
 const nameInputElement = document.getElementById('name-input')
 const noResultsElement = document.getElementById('no-results')
 const generationSelectElement = document.getElementById('generation-select')
+const resetButtonElement = document.getElementById('reset-btn')
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,6 +23,14 @@ nameInputElement.addEventListener('input', () => {
 
 generationSelectElement.addEventListener('change', () => {
 	handleGenerationSelect()
+})
+
+resetButtonElement.addEventListener('click', () => {
+	currGen = 'one'
+	nameInputElement.value = ''
+	typeSelectElement.value = 'all'
+	generationSelectElement.value = 'one'
+	fetchPokemon()
 })
 
 // Variables
