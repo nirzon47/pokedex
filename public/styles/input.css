@@ -15,3 +15,13 @@
 		font-weight: 400;
 	}
 }
+
+@layer components {
+	.card-id {
+		@apply w-full mt-6 text-xl font-semibold text-center bg-white bg-opacity-50;
+	}
+
+	.card {
+		@apply flex flex-col items-center gap-4 mx-auto bg-green-400 w-60 h-80 rounded-xl;
+	}
+}

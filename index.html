@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dracula">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +8,89 @@
 		<!-- Tailwind -->
 		<link rel="stylesheet" href="public/styles/output.css" />
 	</head>
-	<body class="min-h-screen w-screen px-4 py-8">
-		<h1 class="text-4xl font-chelsea text-center">POKEDECKS</h1>
+	<body class="w-screen min-h-screen px-4 py-8">
+		<h1 class="text-4xl text-center font-chelsea">POKEDECKS</h1>
+
+		<!-- Search Elements -->
+		<section
+			class="flex flex-wrap items-end justify-center gap-4 py-6 mx-auto max-w-7xl"
+		>
+			<!-- By name -->
+			<div class="w-full max-w-xs form-control">
+				<label class="label">
+					<span class="text-xs label-text">Search by name</span>
+				</label>
+				<input
+					type="text"
+					placeholder="Type here"
+					class="w-full max-w-xs input input-bordered"
+					id="name-input"
+				/>
+			</div>
+
+			<!-- Search Button -->
+			<button class="btn btn-primary" id="search-btn">Search</button>
+
+			<!-- By Type -->
+			<div class="w-full max-w-xs form-control">
+				<label class="label">
+					<span class="text-xs label-text">Filter by Type</span>
+				</label>
+				<select class="w-full max-w-xs select select-bordered" id="type-select">
+					<option selected>All</option>
+				</select>
+			</div>
+
+			<!-- By Generation -->
+			<div class="w-full max-w-xs form-control">
+				<label class="label">
+					<span class="text-xs label-text">Filter by Generation</span>
+				</label>
+				<select class="w-full max-w-xs select select-bordered" id="type-select">
+					<option value="1" selected>Gen 1</option>
+					<option value="2">Gen 2</option>
+					<option value="3">Gen 3</option>
+					<option value="4">Gen 4</option>
+					<option value="5">Gen 5</option>
+					<option value="6">Gen 6</option>
+					<option value="7">Gen 7</option>
+					<option value="8">Gen 8</option>
+				</select>
+			</div>
+
+			<!-- Reset -->
+			<button class="btn btn-accent" id="search-btn">Reset Results</button>
+		</section>
+
+		<!-- Results -->
+		<section>
+			<!-- Results heading -->
+			<h2 class="pb-6 text-3xl text-center font-chelsea">Results</h2>
+
+			<!-- Pokemon Cards -->
+			<section
+				class="grid items-center justify-center grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 text-zinc-700"
+				id="pokemon-container"
+			>
+				<!-- Mockup Data -->
+				<div class="card">
+					<!-- ID -->
+					<h3 class="card-id">#001</h3>
+					<!-- Image -->
+					<img
+						src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+						alt="Bulbasaur"
+						class="w-32"
+					/>
+					<!-- Name -->
+					<h3 class="text-2xl font-semibold">Bulbasaur</h3>
+
+					<!-- Type -->
+					<p class="cursor-default btn btn-sm rounded-2xl no-animation">
+						Grass
+					</p>
+				</div>
+			</section>
+		</section>
 	</body>
 </html>
