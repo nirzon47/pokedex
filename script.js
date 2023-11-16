@@ -100,6 +100,9 @@ const renderPokemon = (data = pokemon) => {
 	const fragment = document.createDocumentFragment()
 
 	data.forEach((item) => {
+		const div = document.createElement('div')
+		div.classList.add('flex', 'justify-center', 'items-center')
+
 		const label = document.createElement('label')
 		label.classList.add('swap', 'swap-flip', 'w-60')
 
@@ -144,7 +147,8 @@ const renderPokemon = (data = pokemon) => {
                             </p>
                         </div>`
 
-		fragment.append(label)
+		div.append(label)
+		fragment.append(div)
 
 		if (hoverSetting) {
 			label.addEventListener('mouseenter', () => {
