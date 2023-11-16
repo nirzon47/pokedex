@@ -65,6 +65,9 @@
 
 			<!-- Reset -->
 			<button class="btn btn-accent" id="reset-btn">Reset Results</button>
+
+			<!-- Settings -->
+			<button class="btn btn-secondary" id="settings-btn">Settings</button>
 		</section>
 
 		<!-- Results -->
@@ -136,6 +139,38 @@
 				</label>
 			</section>
 		</section>
+
+		<!-- Settings Modal -->
+		<dialog id="settingsModal" class="modal">
+			<div class="w-64 modal-box">
+				<h3 class="pb-6 text-lg font-bold text-center">User Settings</h3>
+				<table>
+					<tbody class="flex flex-col gap-4">
+						<tr>
+							<td>Theme</td>
+							<td class="pl-8">
+								<select
+									class="select select-bordered select-sm"
+									id="theme-select"
+								>
+									<option value="light">Light</option>
+									<option value="dark">Dark</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Enable Hover</td>
+							<td class="pl-8">
+								<input type="checkbox" class="checkbox" id="enable-hover" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<form method="dialog" class="modal-backdrop">
+				<button>close</button>
+			</form>
+		</dialog>
 		<!-- Empty divs to import the tailwind styles -->
 		<div class="bg-green-400"></div>
 		<div class="bg-red-400"></div>

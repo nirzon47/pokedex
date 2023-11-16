@@ -6,6 +6,7 @@ const nameInputElement = document.getElementById('name-input')
 const noResultsElement = document.getElementById('no-results')
 const generationSelectElement = document.getElementById('generation-select')
 const resetButtonElement = document.getElementById('reset-btn')
+const settingsButtonElement = document.getElementById('settings-btn')
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,9 +34,15 @@ resetButtonElement.addEventListener('click', () => {
 	fetchPokemon()
 })
 
+settingsButtonElement.addEventListener('click', () => {
+	settingsModal.showModal()
+})
+
 // Variables
 let pokemon = [] // Globally storing fetched data
 let currGen = 'one' // Current generation
+
+// Local storage variables
 
 // Functions
 const fetchPokemonResponse = (id) => {
