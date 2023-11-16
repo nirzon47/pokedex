@@ -1,17 +1,30 @@
 // DOM Elements
+
+// Sections
 const pokemonContainerElement = document.getElementById('pokemon-container')
-const typeSelectElement = document.getElementById('type-select')
+
+// Elements
 const loadingElement = document.getElementById('loading')
-const nameInputElement = document.getElementById('name-input')
 const noResultsElement = document.getElementById('no-results')
-const generationSelectElement = document.getElementById('generation-select')
+
+// Inputs
+const nameInputElement = document.getElementById('name-input')
+
+// Buttons
 const resetButtonElement = document.getElementById('reset-btn')
 const settingsButtonElement = document.getElementById('settings-btn')
+
+// Selects
+const generationSelectElement = document.getElementById('generation-select')
+const typeSelectElement = document.getElementById('type-select')
+const themeSelectElement = document.getElementById('theme-select')
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
 	fetchPokemon()
 	fetchTypes()
+	setThemeSelect()
+	handleThemeSelect()
 })
 
 typeSelectElement.addEventListener('change', () => {
@@ -38,11 +51,17 @@ settingsButtonElement.addEventListener('click', () => {
 	settingsModal.showModal()
 })
 
+themeSelectElement.addEventListener('change', () => {
+	handleThemeSelect()
+})
+
 // Variables
 let pokemon = [] // Globally storing fetched data
 let currGen = 'one' // Current generation
 
 // Local storage variables
+let theme = localStorage.getItem('theme') || 'dracula'
+// let hoverSetting = localStorage.getItem('hover') || 'false'
 
 // Functions
 const fetchPokemonResponse = (id) => {
@@ -275,4 +294,22 @@ const getSprites = (item) => {
 			item.sprites.other.home.front_shiny,
 		]
 	}
+}
+
+const handleThemeSelect = () => {
+	const currSelection = themeSelectElement.value
+	if (currSelection === 'dark') {
+		document.documentElement.setAttribute('data-theme', 'dracula')
+		theme = 'dark'
+	} else {
+		document.documentElement.setAttribute('data-theme', 'emerald')
+		theme = 'light'
+	}
+
+	localStorage.setItem('theme', theme)
+}
+
+const setThemeSelect = () => {
+	const theme = localStorage.getItem('theme')
+	themeSelectElement.children[theme === 'light' ? 0 : 1].selected = true
 }
