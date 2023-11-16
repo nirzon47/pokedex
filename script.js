@@ -48,6 +48,7 @@ resetButtonElement.addEventListener('click', () => {
 	nameInputElement.value = ''
 	typeSelectElement.value = 'all'
 	generationSelectElement.value = 'one'
+	noResultsElement.classList.add('hidden')
 	fetchPokemon()
 })
 
@@ -66,6 +67,7 @@ enableHoverElement.addEventListener('change', () => {
 // Variables
 let pokemon = [] // Globally storing fetched data
 let currGen = 'one' // Current generation
+let filteredPokemon = [] // Filtered pokemon
 
 // Local storage variables
 let theme = localStorage.getItem('theme') || 'dracula'
@@ -260,9 +262,38 @@ const handleTypeSelect = () => {
 
 	if (selection === 'all') {
 		noResultsElement.classList.add('hidden')
-		renderPokemon()
+		fetchPokemon()
+		filteredPokemon = pokemon
 	} else {
-		const temp = pokemon.filter((item) => item.types[0].type.name === selection)
+		filteredPokemon = pokemon.filter(
+			(item) => item.types[0].type.name === selection
+		)
+
+		if (filteredPokemon.length > 0) {
+			noResultsElement.classList.add('hidden')
+			renderPokemon(filteredPokemon)
+		} else {
+			noResultsElement.classList.remove('hidden')
+			pokemonContainerElement.innerHTML = ''
+		}
+	}
+
+	nameInputElement.value = ''
+}
+
+const handleSearch = () => {
+	const value = nameInputElement.value.toLowerCase()
+
+	if (value === '') {
+		renderPokemon(filteredPokemon)
+	} else {
+		if (filteredPokemon.length === 0) {
+			filteredPokemon = pokemon
+		}
+
+		const temp = filteredPokemon.filter((item) =>
+			item.name.toLowerCase().includes(value)
+		)
 
 		if (temp.length > 0) {
 			noResultsElement.classList.add('hidden')
@@ -271,19 +302,6 @@ const handleTypeSelect = () => {
 			noResultsElement.classList.remove('hidden')
 			pokemonContainerElement.innerHTML = ''
 		}
-	}
-}
-
-const handleSearch = () => {
-	const value = nameInputElement.value.toLowerCase()
-
-	if (value === '') {
-		renderPokemon()
-	} else {
-		const temp = pokemon.filter((item) =>
-			item.name.toLowerCase().includes(value)
-		)
-		renderPokemon(temp)
 	}
 }
 
