@@ -1,4 +1,5 @@
-// DOM Elements
+/* DOM Elements
+ */
 
 // Sections
 const pokemonContainerElement = document.getElementById('pokemon-container')
@@ -9,6 +10,7 @@ const noResultsElement = document.getElementById('no-results')
 
 // Inputs
 const nameInputElement = document.getElementById('name-input')
+const enableHoverElement = document.getElementById('enable-hover')
 
 // Buttons
 const resetButtonElement = document.getElementById('reset-btn')
@@ -25,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	fetchTypes()
 	setThemeSelect()
 	handleThemeSelect()
+	setHoverCheckbox()
+	handleHoverChange()
 })
 
 typeSelectElement.addEventListener('change', () => {
@@ -55,13 +59,17 @@ themeSelectElement.addEventListener('change', () => {
 	handleThemeSelect()
 })
 
+enableHoverElement.addEventListener('change', () => {
+	handleHoverChange()
+})
+
 // Variables
 let pokemon = [] // Globally storing fetched data
 let currGen = 'one' // Current generation
 
 // Local storage variables
 let theme = localStorage.getItem('theme') || 'dracula'
-// let hoverSetting = localStorage.getItem('hover') || 'false'
+let hoverSetting = localStorage.getItem('hover') || 'false'
 
 // Functions
 const fetchPokemonResponse = (id) => {
@@ -91,7 +99,7 @@ const renderPokemon = (data = pokemon) => {
 
 	data.forEach((item) => {
 		const label = document.createElement('label')
-		label.classList.add('swap', 'swap-flip')
+		label.classList.add('swap', 'swap-flip', 'w-60')
 
 		// Getting the id, if it is less than 100, add zeros to make it 3 digit
 		const id = item.id.toString().padStart(3, '0')
@@ -135,6 +143,16 @@ const renderPokemon = (data = pokemon) => {
                         </div>`
 
 		fragment.append(label)
+
+		if (hoverSetting) {
+			label.addEventListener('mouseenter', () => {
+				label.children[0].checked = true
+				console.log('fired')
+			})
+			label.addEventListener('mouseleave', () => {
+				label.children[0].checked = false
+			})
+		}
 	})
 
 	pokemonContainerElement.append(fragment)
@@ -312,4 +330,26 @@ const handleThemeSelect = () => {
 const setThemeSelect = () => {
 	const theme = localStorage.getItem('theme')
 	themeSelectElement.children[theme === 'light' ? 0 : 1].selected = true
+}
+
+const handleHoverChange = () => {
+	const currSelection = enableHoverElement.checked
+	if (currSelection === true) {
+		hoverSetting = true
+	} else {
+		hoverSetting = false
+	}
+
+	renderPokemon()
+
+	localStorage.setItem('hover', hoverSetting)
+}
+
+const setHoverCheckbox = () => {
+	const hover = localStorage.getItem('hover')
+	if (hover === 'true') {
+		enableHoverElement.checked = true
+	} else {
+		enableHoverElement.checked = false
+	}
 }

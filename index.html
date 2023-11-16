@@ -90,11 +90,11 @@
 
 			<!-- Pokemon Cards -->
 			<section
-				class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 text-zinc-700"
+				class="grid grid-cols-1 px-4 gap-x-4 gap-y-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 text-zinc-700"
 				id="pokemon-container"
 			>
 				<!-- Mockup Data -->
-				<label class="swap swap-flip">
+				<label class="swap swap-flip w-60">
 					<!-- Hidden checkbox for toggling -->
 					<input type="checkbox" />
 
@@ -142,11 +142,11 @@
 
 		<!-- Settings Modal -->
 		<dialog id="settingsModal" class="modal">
-			<div class="w-64 modal-box">
+			<div class="w-96 modal-box">
 				<h3 class="pb-6 text-lg font-bold text-center">User Settings</h3>
 				<table>
 					<tbody class="flex flex-col gap-4">
-						<tr>
+						<tr class="flex justify-between">
 							<td>Theme</td>
 							<td class="pl-8">
 								<select
@@ -158,8 +158,8 @@
 								</select>
 							</td>
 						</tr>
-						<tr>
-							<td>Enable Hover</td>
+						<tr class="flex justify-between">
+							<td>Enable Hover (Results will refresh)</td>
 							<td class="pl-8">
 								<input type="checkbox" class="checkbox" id="enable-hover" />
 							</td>
