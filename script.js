@@ -74,12 +74,24 @@ let theme = localStorage.getItem('theme') || 'dracula'
 let hoverSetting = localStorage.getItem('hover') || 'false'
 
 // Functions
+
+/**
+ * Fetches the response for a given Pokemon ID from the PokeAPI.
+ *
+ * @param {number} id - The ID of the Pokemon to fetch.
+ * @return {Promise} - A Promise that resolves to the JSON response from the PokeAPI.
+ */
 const fetchPokemonResponse = (id) => {
 	return fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((response) =>
 		response.json()
 	)
 }
 
+/**
+ * Fetches the details of multiple Pokemon asynchronously.
+ *
+ * @return {Promise<void>} A promise that resolves when all the Pokemon details have been fetched.
+ */
 const fetchPokemon = async () => {
 	const promises = []
 
@@ -95,6 +107,11 @@ const fetchPokemon = async () => {
 	})
 }
 
+/**
+ * Renders the Pokemon data on the webpage.
+ *
+ * @param {Array} [data=pokemon] - The data to be rendered. Defaults to the "pokemon" array.
+ */
 const renderPokemon = (data = pokemon) => {
 	pokemonContainerElement.innerHTML = ''
 	const fragment = document.createDocumentFragment()
@@ -164,6 +181,12 @@ const renderPokemon = (data = pokemon) => {
 	pokemonContainerElement.append(fragment)
 }
 
+/**
+ * Generates a function comment for the given function body.
+ *
+ * @param {object} item - The item to process.
+ * @return {array} An array containing the types and abilities.
+ */
 const getTypesAndAbilities = (item) => {
 	// Getting all the types
 	let types = ''
@@ -184,6 +207,12 @@ const getTypesAndAbilities = (item) => {
 	return [types, abilities]
 }
 
+/**
+ * Returns the background color based on the given type.
+ *
+ * @param {string} type - The type of the background color.
+ * @return {string} The corresponding background color.
+ */
 const getBackgroundColor = (type) => {
 	switch (type) {
 		case 'grass':
@@ -248,6 +277,11 @@ const getBackgroundColor = (type) => {
 	}
 }
 
+/**
+ * Fetches types from the PokeAPI and appends them to a select element.
+ *
+ * @return {Promise<void>} A Promise that resolves when the types are fetched and appended.
+ */
 const fetchTypes = async () => {
 	const response = await fetch('https://pokeapi.co/api/v2/type')
 	const data = await response.json()
@@ -261,6 +295,11 @@ const fetchTypes = async () => {
 	})
 }
 
+/**
+ * Handles the selection of a type in the type select element.
+ *
+ * @return {undefined} This function does not return a value.
+ */
 const handleTypeSelect = () => {
 	const selection = typeSelectElement.value
 
@@ -285,6 +324,11 @@ const handleTypeSelect = () => {
 	nameInputElement.value = ''
 }
 
+/**
+ * Handles the search functionality.
+ *
+ * @return {undefined} There is no return value.
+ */
 const handleSearch = () => {
 	const value = nameInputElement.value.toLowerCase()
 
@@ -309,6 +353,12 @@ const handleSearch = () => {
 	}
 }
 
+/**
+ * Handles the selection of a generation.
+ *
+ * @param {type} - None
+ * @return {type} - None
+ */
 const handleGenerationSelect = () => {
 	currGen = generationSelectElement.value
 	fetchPokemon()
@@ -316,6 +366,12 @@ const handleGenerationSelect = () => {
 	typeSelectElement.value = 'all'
 }
 
+/**
+ * Retrieves the sprites of an item.
+ *
+ * @param {Object} item - The item object.
+ * @return {Array} An array containing the front default and front shiny sprites.
+ */
 const getSprites = (item) => {
 	if (
 		currGen === 'one' ||
@@ -336,6 +392,11 @@ const getSprites = (item) => {
 	}
 }
 
+/**
+ * Sets the theme based on the selected value in the theme select element.
+ *
+ * @return {undefined} No return value.
+ */
 const handleThemeSelect = () => {
 	const currSelection = themeSelectElement.value
 	if (currSelection === 'dark') {
@@ -349,11 +410,23 @@ const handleThemeSelect = () => {
 	localStorage.setItem('theme', theme)
 }
 
+/**
+ * Sets the selected option in the theme select element based on the value stored in local storage.
+ *
+ * @param {void}
+ * @return {void}
+ */
 const setThemeSelect = () => {
 	const theme = localStorage.getItem('theme')
 	themeSelectElement.children[theme === 'light' ? 0 : 1].selected = true
 }
 
+/**
+ * Handles the change event for the hover setting.
+ *
+ * @param {none} none - This function does not take any parameters.
+ * @return {none} This function does not return any value.
+ */
 const handleHoverChange = () => {
 	const currSelection = enableHoverElement.checked
 	if (currSelection === true) {
@@ -367,6 +440,11 @@ const handleHoverChange = () => {
 	localStorage.setItem('hover', hoverSetting)
 }
 
+/**
+ * Sets the value of the hover checkbox based on the value stored in localStorage.
+ *
+ * @returns {void}
+ */
 const setHoverCheckbox = () => {
 	const hover = localStorage.getItem('hover')
 	if (hover === 'true') {
